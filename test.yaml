@@ -1,0 +1,7 @@
+# test.yaml
+- name: Setup GHDL
+  uses: ghdl/setup-ghdl-ci@nightly
+
+- run: |
+    ghdl --version
+    ghdl -c test1.vhdl -r part1_tb
