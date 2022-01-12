@@ -1,38 +1,8 @@
-name: Test
+- uses: ghdl/setup-ghdl-ci@nightly
+  with:
+    backend: llvm
 
-on:
-  pull_request:
-  push:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
+- run: |
+    ghdl --version
 
-jobs:
-
-
-  ubuntu:
-    strategy:
-      fail-fast: false
-      matrix:
-        backend: [ llvm ]
-        version: [ latest ]
-    runs-on: ubuntu-${{ matrix.version }}
-    name: '🐧 Ubuntu ${{ matrix.version }} · ${{ matrix.backend }}'
-    steps:
-
-    - name: '🧰 Checkout'
-      uses: actions/checkout@v2
-
-    - name: Run Action
-      uses: ./
-      with:
-        backend: ${{ matrix.backend }}
-
-    - name: Test
-      run: |
-        echo "GHDL_PREFIX: $GHDL_PREFIX"
-        echo "GHDL: $GHDL"
-        echo "GHDL_LIBS: $GHDL_LIBS"
-        ghdl --version
-        $GHDL --version
-
+    $GHDL --version
