@@ -6,8 +6,6 @@ jobs:
     steps:
     - name: Get GHDL
       uses: ghdl/setup-ghdl-ci@nightly
-      with:
-        backend: gcc
     - name: Check out repository code
       uses: actions/checkout@v2
     - name: Run GHDL
