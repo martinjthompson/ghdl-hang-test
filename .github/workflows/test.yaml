@@ -10,6 +10,5 @@ jobs:
         backend: llvm
     - name: Run GHDL
       run: |
-        ghdl --version
-
-        $GHDL --version
+        ghdl -c test1.vhdl -r part1_tb
+        
