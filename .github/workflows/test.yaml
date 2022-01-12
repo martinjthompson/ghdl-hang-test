@@ -1,8 +1,15 @@
-- uses: ghdl/setup-ghdl-ci@nightly
-  with:
-    backend: llvm
+name: GHDL test
+on: [push]
+jobs:
+  Run-on-Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with:
+        backend: llvm
+    - name: Run GHDL
+    - run: |
+        ghdl --version
 
-- run: |
-    ghdl --version
-
-    $GHDL --version
+        $GHDL --version
