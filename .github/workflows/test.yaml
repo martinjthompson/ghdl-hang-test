@@ -1,7 +1,38 @@
-# test.yaml
-- name: Setup GHDL
-  uses: ghdl/setup-ghdl-ci@nightly
+name: Test
 
-- run: |
-    ghdl --version
-    ghdl -c test1.vhdl -r part1_tb
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+
+
+  ubuntu:
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [ llvm ]
+        version: [ latest ]
+    runs-on: ubuntu-${{ matrix.version }}
+    name: '🐧 Ubuntu ${{ matrix.version }} · ${{ matrix.backend }}'
+    steps:
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: Run Action
+      uses: ./
+      with:
+        backend: ${{ matrix.backend }}
+
+    - name: Test
+      run: |
+        echo "GHDL_PREFIX: $GHDL_PREFIX"
+        echo "GHDL: $GHDL"
+        echo "GHDL_LIBS: $GHDL_LIBS"
+        ghdl --version
+        $GHDL --version
+
