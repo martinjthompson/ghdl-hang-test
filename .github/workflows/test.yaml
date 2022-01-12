@@ -9,6 +9,7 @@ jobs:
       with:
         backend: llvm
     - name: Run GHDL
+      working-directory: .
       run: |
         ghdl -c test1.vhdl -r part1_tb
         
