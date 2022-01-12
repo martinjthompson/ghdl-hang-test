@@ -12,6 +12,7 @@ jobs:
       continue-on-error: true
       run: |
         ghdl --version
+        ghdl --help
         ghdl -c test1.vhdl
         ghdl -e part1_tb
         ghdl -r part1_tb
