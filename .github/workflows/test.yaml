@@ -12,5 +12,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Run GHDL
       run: |
-        ghdl -c test1.vhdl -r part1_tb
+        ghdl -c test1.vhdl
+        ghdl -r part1_tb
         
