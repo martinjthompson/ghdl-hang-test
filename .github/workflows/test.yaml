@@ -13,5 +13,6 @@ jobs:
     - name: Run GHDL
       run: |
         ghdl -c test1.vhdl
+        ghdl -e part1_tb
         ghdl -r part1_tb
         
