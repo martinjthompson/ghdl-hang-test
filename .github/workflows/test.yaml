@@ -2,12 +2,20 @@ name: GHDL test
 on: [push]
 jobs:
   Run-on-Ubuntu:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [ '', mcode, llvm, gcc ]
+        version: [ 18.04, 20.04, latest ]
+    runs-on: ubuntu-${{ matrix.version }}
+    name: '🐧 Ubuntu ${{ matrix.version }} · ${{ matrix.backend }}'
     steps:
-    - name: Get GHDL
-      uses: ghdl/setup-ghdl-ci@nightly
     - name: Check out repository code
       uses: actions/checkout@v2
+    - name: Get GHDL
+      uses: ghdl/setup-ghdl-ci@nightly
+      with: 
+        backend: ${{ matrix.backend }}
     - name: Run GHDL
       continue-on-error: true
       run: |
