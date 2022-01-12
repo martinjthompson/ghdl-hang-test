@@ -8,8 +8,9 @@ jobs:
       uses: ghdl/setup-ghdl-ci@nightly
       with:
         backend: llvm
+    - name: Check out repository code
+      uses: actions/checkout@v2
     - name: Run GHDL
-      working-directory: .
       run: |
         ghdl -c test1.vhdl -r part1_tb
         
