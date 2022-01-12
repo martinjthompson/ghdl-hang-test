@@ -9,7 +9,7 @@ jobs:
       with:
         backend: llvm
     - name: Run GHDL
-    - run: |
+      run: |
         ghdl --version
 
         $GHDL --version
