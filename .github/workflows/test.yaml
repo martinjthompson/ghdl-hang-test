@@ -7,12 +7,15 @@ jobs:
     - name: Get GHDL
       uses: ghdl/setup-ghdl-ci@nightly
       with:
-        backend: llvm
+        backend: gcc
     - name: Check out repository code
       uses: actions/checkout@v2
     - name: Run GHDL
       run: |
+        ghdl --version
         ghdl -c test1.vhdl
         ghdl -e part1_tb
         ghdl -r part1_tb
-        
+    - name: List files in the repository
+      run: |
+        ls -al ${{ github.workspace }}
